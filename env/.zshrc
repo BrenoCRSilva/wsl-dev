@@ -9,13 +9,11 @@ bindkey "^ " autosuggest-accept
 
 # Environment variables
 export DISPLAY=:0
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
-export PATH="$PATH:$HOME/.codeium/bin"
 export GOPATH="$HOME/.local/go"
 export XDG_RUNTIME_DIR="/tmp"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -77,6 +75,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias c='clear'
 alias b='cd ..'
+alias cdwin='cd /mnt/c/Users/breno/'
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
