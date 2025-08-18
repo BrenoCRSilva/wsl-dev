@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
@@ -10,7 +9,15 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+base_name=$(basename "$selected" | tr . _)
+
+# If the path is under /mnt, prepend "win-" to the name
+if [[ "$selected" == /mnt/* ]]; then
+    selected_name="win-${base_name}"
+else
+    selected_name=$base_name
+fi
+
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then

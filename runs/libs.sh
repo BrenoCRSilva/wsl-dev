@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-paru -S --noconfirm --needed python-pip ripgrep git btop htop jq fzf curl wget zoxide
+paru -S --noconfirm --needed python-pip ripgrep git btop htop jq fzf curl wget zoxide keychain
