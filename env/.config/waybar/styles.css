@@ -1,0 +1,351 @@
+/* ================================================================================
+   WAYBAR - Rose Pine Theme (Ported from YASB)
+   A comprehensive CSS theme with consistent spacing and improved organization
+   ================================================================================ */
+
+/* ================================================================================
+   GLOBAL STYLES AND VARIABLES
+   Base styling applied to all elements
+   ================================================================================ */
+* {
+    font-family: "FiraCode Nerd Font Propo";
+    font-size: 13px;
+    color: #e0def4;
+    font-weight: 500;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* ================================================================================
+   MAIN BAR CONTAINER
+   ================================================================================ */
+window#waybar {
+    background: #191724;
+    color: #e0def4;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* ================================================================================
+   BASE MODULE STYLES
+   Common styling for all modules
+   ================================================================================ */
+.modules-left,
+.modules-center,
+.modules-right {
+    background: transparent;
+    margin: 0;
+}
+
+.modules-left {
+    padding-left: 2px;
+}
+
+.modules-right {
+    padding-right: 1px;
+}
+
+/* Default module styling */
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > *,
+.modules-left > widget:first-child > *,
+.modules-left > widget:last-child > *,
+.modules-center > widget:first-child > *,
+.modules-center > widget:last-child > *,
+.modules-right > widget:first-child > *,
+.modules-right > widget:last-child > *  {
+    background: #191724;
+    color: #e0def4;
+    padding: 4px 8px;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ================================================================================
+   LEFT MODULE GROUP STYLING
+   ================================================================================ */
+
+/* Power menu - first in left group */
+#custom-power-menu {
+    background: #191724;
+    color: #eb6f92;
+    font-size: 21px;
+    padding: 4px 8px;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+}
+
+#custom-power-menu:hover {
+    background: rgba(235, 111, 146, 0.1);
+}
+
+/* Disk widget */
+#disk {
+    background: #191724;
+    color: #9ccfd8;
+    font-size: 21px;
+    padding: 4px 8px;
+    margin-right: 0;
+}
+
+#disk.warning {
+    color: #f6c177;
+}
+
+#disk.critical {
+    color: #eb6f92;
+}
+
+/* Wallpapers widget */
+#custom-wallpapers {
+    background: #191724;
+    color: #e0def4;
+    font-size: 22px;
+    padding: 4px 8px;
+}
+
+/* CPU widget */
+#cpu {
+    background: #191724;
+    color: #c4a7e7;
+    font-size: 20px;
+    padding: 4px 8px;
+    margin-left: 8px;
+}
+
+#cpu:hover {
+    background: rgba(196, 167, 231, 0.1);
+}
+
+/* Memory widget */
+#memory {
+    background: #191724;
+    color: #ebbcba;
+    padding: 4px 8px;
+}
+
+#memory:hover {
+    background: rgba(235, 188, 186, 0.1);
+}
+
+/* Network speed widget */
+#network.speed {
+    background: #191724;
+    color: #f6c177;
+    padding: 4px 8px;
+    font-family: "FiraCode Nerd Font Propo", monospace;
+    font-size: 12px;
+}
+
+/* Kanata widget - last in left group */
+#custom-kanata {
+    background: #191724;
+    color: #31748f;
+    font-size: 23px;
+    padding: 4px 8px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+/* ================================================================================
+   CENTER MODULE GROUP STYLING - WORKSPACES AND WINDOW
+   ================================================================================ */
+
+/* Workspaces */
+#workspaces {
+    background: #191724;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    padding: 2px 6px;
+    margin: 0;
+}
+
+#workspaces button {
+    background: #26233a;
+    color: #95a0ad;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    margin: 4px 4px;
+    padding: 0px 8px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+    background: #26233a;
+    color: #eb6f92;
+}
+
+#workspaces button.active {
+    background: #26233a;
+    color: #eb6f92;
+}
+
+#workspaces button.urgent {
+    background: #eb6f92;
+    color: #191724;
+}
+
+/* Window title */
+#window {
+    background: #191724;
+    color: #3e8fb0;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    max-width: 400px;
+}
+
+/* ================================================================================
+   RIGHT MODULE GROUP STYLING
+   ================================================================================ */
+
+/* MPRIS Media player */
+#mpris {
+    background: #191724;
+    color: #e0def4;
+    padding: 4px 8px;
+    margin-right: 8px;
+    border-radius: 9px;
+    max-width: 300px;
+}
+
+#mpris.paused {
+    color: #908caa;
+}
+
+/* WirePlayer Volume widget - first in right group */
+#wireplumber {
+    background: #191724;
+    color: #908caa;
+    padding: 4px 8px;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    min-width: 70px;
+    max-width: 70px;
+    overflow: hidden;
+}
+
+#wireplumber.muted {
+    color: #eb6f92;
+}
+
+#wireplumber:hover {
+    background: rgba(144, 140, 170, 0.1);
+}
+
+/* Weather widget */
+#custom-weather {
+    background: #191724;
+    color: #e0def4;
+    padding: 4px 8px;
+}
+
+/* Weather icon color variations */
+#custom-weather.sunny {
+    color: #f6c177;
+}
+
+#custom-weather.clear-night {
+    color: #524f67;
+}
+
+#custom-weather.cloudy {
+    color: #f6c177;
+}
+
+#custom-weather.cloudy-night {
+    color: #6e6a86;
+}
+
+#custom-weather.rainy {
+    color: #9ccfd8;
+}
+
+#custom-weather.rainy-night {
+    color: #31748f;
+}
+
+/* Clock widget - last in right group */
+#clock {
+    background: #191724;
+    color: #e0def4;
+    padding: 4px 8px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    font-weight: 500;
+}
+
+/* ================================================================================
+   HOVER EFFECTS
+   ================================================================================ */
+#custom-wallpapers:hover,
+#custom-kanata:hover,
+#custom-weather:hover,
+#clock:hover {
+    background: rgba(224, 222, 244, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* ================================================================================
+   TOOLTIP STYLING
+   ================================================================================ */
+tooltip {
+    background: #26233a;
+    border: 2px solid #524f67;
+    border-radius: 8px;
+    color: #e0def4;
+    font-family: "FiraCode Nerd Font Propo";
+}
+
+tooltip label {
+    color: #e0def4;
+    padding: 4px;
+}
+
+/* ================================================================================
+   POWER MENU SPECIFIC STYLING (for rofi integration)
+   ================================================================================ */
+.power-menu-popup {
+    background-color: rgba(25, 23, 36, 0.95);
+    border-radius: 12px;
+    border: 4px solid #26233a;
+}
+
+/* ================================================================================
+   SPECIAL STATES
+   ================================================================================ */
+.warning {
+    color: #f6c177;
+}
+
+.critical {
+    color: #eb6f92;
+}
+
+.good {
+    color: #9ccfd8;
+}
+
+.urgent {
+    color: #eb6f92;
+    animation: blink 1s linear infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #eb6f92;
+        color: #191724;
+    }
+}

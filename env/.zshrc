@@ -17,7 +17,7 @@ export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 export GOPATH="$HOME/.local/go"
 export XDG_RUNTIME_DIR="/tmp"
 export XDG_CONFIG_HOME="$HOME/.config"
-export ZSH_CACHE="$HOME/.cache/zsh/"
+export ZSH_CACHE="$HOME/.cache/zsh"
 
 # Create ZSH cache directory if it doesn't exist
 [[ ! -d $ZSH_CACHE ]] && mkdir -p $ZSH_CACHE

@@ -2,7 +2,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/ ~/Workspace/projects ~/personal/ ~/.config/nvim /mnt/c/Users/breno/personal/ -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find ~/ ~/Workspace/projects ~/personal/ /mnt/c/Users/breno/personal/ ~/Workspace/pucrs -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
