@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 script_dir="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 dry="0"
-
+only_configs=()
 
 while [[ $# > 0 ]]; do
     if [[ "$1" == "--dry" ]]; then
         dry="1"
+    elif [[ "$1" == "--config" ]]; then
+        shift
+        only_configs+=("$1")
     fi
     shift
 done
@@ -26,7 +29,6 @@ execute() {
     "$@"
 }
 
-# Create directory if it doesn't exist
 ensure_dir() {
     local dir="$1"
     if [[ ! -d "$dir" ]]; then
@@ -35,15 +37,21 @@ ensure_dir() {
 }
 
 copy_dir() {
-    pushd $1
-    to=$2
+    local from="$1"
+    local to="$2"
+    
+    if [[ ! -d "$from" ]]; then
+        log "Warning: Source directory $from does not exist, skipping"
+        return
+    fi
+    
     ensure_dir "$to"
-    dirs=$(find . -maxdepth 1 -mindepth 1 -type d ! -name ".git")
-    for dir in $dirs; do
-        execute rm -rf $to/$dir
-        execute cp -r $dir $to/$dir
-    done
-    popd
+    
+    if command -v rsync >/dev/null 2>&1; then
+        execute rsync -av "$from/" "$to/"  # Note the trailing slashes
+    else
+        execute cp -r "$from/." "$to/"     # Use "/." to copy contents
+    fi
 }
 
 copy_file() {
@@ -51,9 +59,21 @@ copy_file() {
     to=$2
     name=$(basename $from)
     ensure_dir "$to"
-    execute rm $to/$name 
     execute cp $from $to/$name
 }
+
+if [ -z "$XDG_DATA_HOME" ]; then
+    echo "no xdg data home"
+    echo "using ~/.local/share"
+    XDG_DATA_HOME="$HOME/.local/share"
+fi
+
+LOCAL_BIN="$HOME/.local/bin"
+if [[ ":$PATH:" != *":$LOCAL_BIN:"* ]]; then
+    log "Note: Add $LOCAL_BIN to your PATH in your shell configuration"
+    log "Add this line to your ~/.zshrc or ~/.bashrc:"
+    log "export PATH=\"\$HOME/.local/bin:\$PATH\""
+fi
 
 if [ -z "$XDG_CONFIG_HOME" ]; then
     echo "no xdg config home"
@@ -61,9 +81,30 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
     XDG_CONFIG_HOME=$HOME/.config
 fi
 
-copy_dir env/.config $XDG_CONFIG_HOME
-copy_file env/.zshrc $HOME
+log "--------- local setup ---------"
+log "XDG_DATA_HOME: $XDG_DATA_HOME"
+log "LOCAL_BIN: $LOCAL_BIN"
+log "XDG_CONFIG_HOME: $XDG_CONFIG_HOME"
+
+# If specific configs requested, only install those
+if [[ ${#only_configs[@]} -gt 0 ]]; then
+    log "Installing only configs: ${only_configs[*]}"
+    for config in "${only_configs[@]}"; do
+        config_path="env/.config/$config"
+        if [[ -d "$config_path" ]]; then
+            log "Installing config: $config"
+            copy_dir "$config_path" "$XDG_CONFIG_HOME/$config"
+        else
+            log "Warning: Config '$config' not found at $config_path"
+        fi
+    done
+else
+    # Install everything
+    log "Installing all configs..."
+    copy_dir env/.local/share/applications $XDG_DATA_HOME/applications
+    copy_dir env/.local/bin $LOCAL_BIN
+    copy_dir env/.config $XDG_CONFIG_HOME
+    copy_file env/.zshrc $HOME
+fi
+
 log "--------- dev-env ---------"
-
-
-

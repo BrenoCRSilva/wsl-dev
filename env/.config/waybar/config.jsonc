@@ -1,51 +1,135 @@
-{
+[{
     "layer": "top",
+    "output": "DP-3",
     "position": "top",
-    "height": 36,
-    "spacing": 4,
     "margin-top": 4,
-    "margin-left": 4,
     "margin-bottom": 4,
-    "margin-right": 7,
     
     "modules-left": [
         "custom/power-menu",
-        "disk",
-        "custom/wallpapers",
-        "cpu",
-        "memory",
-        "network",
-        "custom/netspeed",
-        "custom/kanata"
+        "mpris"
     ],
     
     "modules-center": [
         "hyprland/workspaces",
-        "hyprland/window"
     ],
     
     "modules-right": [
-        "pulseaudio",
-        "custom/weather",
-        "clock"
+        "custom/kanata",
     ],
 
     "custom/kanata": {
-        "format": "󰌌 {}",
-        "exec": "pgrep -x kanata >/dev/null && echo 'kanata' || echo 'qwerty'",
+        "format": "<span size='21000'>󰌌</span> <span size='14000' rise='2500'>{}</span>",
+        "exec": "pgrep -x kanata >/dev/null && echo 'development' || echo 'gaming'",
         "interval": 5,
-        "on-click": "kanata -c ~/.config/kanata/kanata.kbd -p 9999 &",
-        "on-click-right": "pkill kanata",
+        "on-click": "~/.config/waybar/scripts/kanata-toggle.sh",
         "tooltip": "Click to start Kanata, right-click to stop"
     },
 
-    "hyprland/window": {
-        "format": "{}",
-        "max-length": 56,
-        "separate-outputs": true,
-        "rewrite": {
-            "": " "
+    "mpris": {
+        "format": " <span size='15000' rise='2000'>{status_icon}</span> <span size='12000' rise='2000'><i>{artist}: {title}</i></span>",
+        "player": "playerctld",
+        "max-length": 50,
+        "on-click": "playerctl play-pause",
+        "format-paused": " <span size='15000' rise='2000'>{status_icon}</span> <span size='12000' rise='2000'><i>{artist}: {title}</i></span>",
+        "player-icons": {
+          "default": " ",
+          "spotify": " ",
+          "mpv": " "
+        },
+        "status-icons": {
+          "paused": "⏸",
+          "playing": "▶"
         }
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",      // Terminal
+            "2": "",      // Browser
+            "3": "",      // AI
+            "4": "󰗃",      // YouTube
+            "5": "󰓓",      // Gaming
+            "6": "󰎧",      // Second Browser
+            "7": "",      // Communication
+            "8": "󰇮",      // Email
+            "9": "󰊻",      // Teams
+            "10": ""      // Spotify
+        },
+        "persistent-workspaces": {
+            "DP-3": [1, 2, 3],
+            "HDMI-A-1": [7, 8]
+        },
+        "active-only": false,
+        "on-click": "activate"
+    },
+
+
+
+    "custom/power-menu": {
+        "format": "󰣇",
+        "on-click": "~/.config/wofi/scripts/arch-menu.sh",
+        "tooltip": false,
+        "escape": true
+    },
+
+
+}, {
+    "layer": "top",
+    "output": "HDMI-A-1",
+    "position": "top",
+    "margin-top": 4,
+    "margin-bottom": 4,
+    
+    "modules-left": [
+        "cpu",
+        "memory",
+        "network",
+    ],
+    
+    "modules-center": [
+        "hyprland/workspaces",
+    ],
+    
+    "modules-right": [
+        "bluetooth",
+        "wireplumber",
+        "clock"
+    ],
+
+    "network": {
+        "interface": "enp*", // Or specify exact interface like "enp0s31f6"
+        "format-ethernet": "<span size='17000'>󰈀</span> <span rise='2000'>{bandwidthDownBits}</span>",
+        "format-disconnected": "󰌙 Disconnected",
+        "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}\nCIDR: {cidr}\nDown: {bandwidthDownBits}\nUp: {bandwidthUpBits}",
+        "interval": 2,
+        "max-length": 50
+    },
+
+    "wireplumber": {
+        "format": "{icon}",
+        "format-muted": "󰖁 ",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋋", 
+            "headset": "󰋋",
+            "phone": "󰄜",
+            "portable": "󰄜",
+            "car": "󰄞",
+            "default": [" ", " ", " "] 
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+
+    "bluetooth": {
+        "format": "",
+        "format-disabled": "󰂲",
+        "format-connected": "",
+        "tooltip-format": "Devices connected: {num_connections}",
+        "on-click": "blueberry"
     },
 
     "clock": {
@@ -67,90 +151,38 @@
         }
     },
 
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",      // Terminal
+            "2": "",      // Browser
+            "3": "",      // AI
+            "4": "󰗃",      // YouTube
+            "5": "󰓓",      // Gaming
+            "6": "󰎧",      // Second Browser
+            "7": "",      // Communication
+            "8": "󰇮",      // Email
+            "9": "󰊻",      // Teams
+            "10": ""      // Spotify
+        },
+        "persistent-workspaces": {
+            "DP-3": [1, 2, 3],
+            "HDMI-A-1": [7, 8]
+        },
+        "active-only": false,
+        "on-click": "activate"
+    },
+
     "cpu": {
-        "format": "󱘖 {usage}%",
-        "format-alt": "󰍛 {usage}%",
+        "format": "<span size='18800'>󰍛</span> <span rise='2000'>{usage}%</span>",
         "interval": 2,
-        "on-click-right": "cmd /c Taskmgr",
+        "on-click": "ghostty -e htop",
         "tooltip": false
     },
 
     "memory": {
-        "format": "󰾆 {percentage}%",
-        "format-alt": "󰾆 {avail}",
+        "format": "<span size='18000'></span> <span rise='1500'>{percentage}%</span>",
         "interval": 10,
-        "on-click-right": "cmd /c Taskmgr",
         "tooltip": false
     },
-
-    "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "active": "󰮯",
-            "default": "󰊠"
-        },
-        "persistent-workspaces": {
-            "*": 5
-        },
-        "on-click": "activate"
-    },
-
-    "network": {
-        "format-wifi": "{icon}",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰤭",
-        "format-alt": "{essid} {signalStrength}%",
-        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-        "tooltip-format": "{ifname} via {gwaddr}",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "tooltip-format-ethernet": "{ifname}",
-        "tooltip-format-disconnected": "Disconnected",
-        "on-click": "cmd.exe /c start ms-settings:network",
-        "on-click-right": "toggle"
-    },
-
-    "custom/weather": {
-        "format": "{icon} {text}",
-        "exec": "python ~/.config/waybar/weather.py",
-        "return-type": "json",
-        "interval": 600,
-        "tooltip": true
-    },
-
-    "wireplumber": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰖁 ",
-        "format-icons": {
-            "headphone": "󰋋",
-            "hands-free": "󰋋", 
-            "headset": "󰋋",
-            "phone": "󰄜",
-            "portable": "󰄜",
-            "car": "󰄞",
-            "default": ["󰖁", "󰕾", "󰖀", "󰕾"]
-        },
-        "scroll-step": 1,
-        "on-click": "pavucontrol",
-        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-    },
-
-    "custom/power-menu": {
-        "format": "⏻",
-        "on-click": "~/.config/waybar/power-menu.sh",
-        "tooltip": false
-    },
-
-    "disk": {
-        "interval": 30,
-        "format": "󱛟",
-        "path": "/",
-        "tooltip-format": "Used: {used} / {total} ({percentage_used}%)",
-        "on-click": "toggle"
-    },
-
-    "custom/wallpapers": {
-        "format": "󰸉",
-        "on-click": "~/.config/waybar/wallpaper-menu.sh",
-        "tooltip": false
-    }
-}
+}]

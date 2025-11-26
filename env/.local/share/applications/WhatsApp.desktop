@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=WhatsApp
+Comment=WhatsApp Web App
+Exec=/home/brenocrs/.local/bin/pwa-launch.sh whatsapp
+Icon=whatsapp
+Terminal=false
+Type=Application
+Categories=Network;Chat;

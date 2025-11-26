@@ -1,0 +1,9 @@
+width=300
+height=300
+location=center
+hide_search=true
+key_up=Up,k
+key_down=Down,j
+key_submit=Return
+key_exit=Escape,ctrl+c
+cache_file=/dev/null

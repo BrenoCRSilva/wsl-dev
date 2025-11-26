@@ -15,7 +15,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 export GOPATH="$HOME/.local/go"
-export XDG_RUNTIME_DIR="/tmp"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"  # THIS IS THE KEY LINE
 export XDG_CONFIG_HOME="$HOME/.config"
 export ZSH_CACHE="$HOME/.cache/zsh"
 
@@ -79,8 +79,8 @@ alias cdwin='cd /mnt/c/Users/breno/'
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
-eval $(keychain --eval --quiet id_ed25519)
+eval $(keychain --eval --quiet id_ed25519 id_ed25519_talqui)
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  tmux a -t default || exec tmux new -s default && exit;
+  tmux a -t home || exec tmux new -s home && exit;
 fi

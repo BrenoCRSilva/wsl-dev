@@ -1,0 +1,225 @@
+/* ================================================================================
+   WAYBAR - Rose Pine Theme
+   ================================================================================ */
+
+/* ================================================================================
+   GLOBAL STYLES
+   ================================================================================ */
+* {
+    border: none;
+    font-family: "FiraCode Nerd Font Propo";
+    font-size: 16px;
+    min-height: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+/* ================================================================================
+   MAIN BAR CONTAINER
+   ================================================================================ */
+window#waybar {
+    background: rgba(25, 23, 36, 0);
+    color: #e0def4;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* ================================================================================
+   GENERAL MODULE STYLES
+   ================================================================================ */
+#custom-power-menu,
+#cpu,
+#memory,
+#custom-kanata,
+#network,
+#bluetooth,
+#wireplumber,
+#clock,
+#mpris {
+    background: #191724;
+    color: #e0def4;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+    transition: none;
+    font-weight: 500;
+}
+
+/* ================================================================================
+   MONITOR 1 (DP-3) - LEFT: Power Menu
+   ================================================================================ */
+#custom-power-menu {
+    padding-left: 14px;
+    padding-right: 14px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 9px;
+    color: #eb6f92;
+    font-size: 25px;
+}
+
+#custom-power-menu:hover {
+    background: rgba(235, 111, 146, 0.5);
+}
+
+/* ================================================================================
+   MONITOR 1 (DP-3) - CENTER: Media Player
+   ================================================================================ */
+#mpris {
+    border-radius: 9px;
+    margin: 6px 8px;
+    padding: 4px 8px;
+}
+
+#mpris.paused {
+    color: #908caa;
+}
+
+/* ================================================================================
+   MONITOR 1 (DP-3) - RIGHT: Kanata
+   ================================================================================ */
+#custom-kanata {
+    margin-right: 5px;
+    border-radius: 9px;
+    color: #31748f;
+}
+
+#custom-kanata:hover {
+    background: rgba(49, 116, 143, 0.5);
+}
+
+/* ================================================================================
+   MONITOR 2 (HDMI-A-1) - LEFT: CPU + Memory + Network
+   ================================================================================ */
+#cpu {
+    margin-left: 5px;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    color: #c4a7e7;
+}
+
+#cpu:hover {
+    background: rgba(196, 167, 231, 0.5);
+}
+
+#memory {
+    color: #ebbcba;
+}
+
+#memory:hover {
+    background: rgba(235, 188, 186, 0.5);
+}
+
+#network {
+    margin-right: 5px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    color: #f6c177;
+}
+
+#network:hover {
+    background: rgba(246, 193, 119, 0.5);
+}
+
+/* ================================================================================
+   MONITOR 2 (HDMI-A-1) - RIGHT: Bluetooth + Volume + Clock
+   ================================================================================ */
+#bluetooth {
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    color: #908caa;
+    padding-left: 14px;
+}
+
+#bluetooth:hover {
+    background: rgba(144, 140, 170, 0.5);
+}
+
+#wireplumber {
+    min-width: 28px;
+    color: #908caa;
+    padding-left: 8px;
+    padding-right: 4px;
+}
+
+#wireplumber.muted {
+    color: #eb6f92;
+}
+
+#wireplumber:hover {
+    background: rgba(144, 140, 170, 0.5);
+}
+
+#clock {
+    margin-right: 5px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    color: #e0def4;
+}
+
+#clock:hover {
+    background: rgba(224, 222, 244, 0.1);
+}
+
+/* ================================================================================
+   WORKSPACES (BOTH MONITORS)
+   ================================================================================ */
+#workspaces {
+    background: #191724;
+    border-radius: 9px;
+    margin: 6px 5px;
+    padding: 2px 6px;
+}
+
+#workspaces button {
+    color: #95a0ad;
+    background: #26233a;
+    padding: 4px 8px;
+    margin: 4px 4px;
+    border-radius: 6px;
+    transition: color 0.3s ease;
+}
+
+#workspaces button:hover {
+    color: #eb6f92;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+    color: #eb6f92;
+}
+
+#workspaces button.urgent {
+    background: #eb6f92;
+    color: #191724;
+    animation: blink 1s linear infinite alternate;
+}
+
+/* ================================================================================
+   TOOLTIP STYLING
+   ================================================================================ */
+tooltip {
+    background: #26233a;
+    border: 2px solid #524f67;
+    border-radius: 8px;
+    color: #e0def4;
+    font-family: "FiraCode Nerd Font Propo";
+}
+
+tooltip label {
+    color: #e0def4;
+    padding: 4px;
+}
+
+/* ================================================================================
+   ANIMATIONS
+   ================================================================================ */
+@keyframes blink {
+    to {
+        background-color: #eb6f92;
+        color: #191724;
+    }
+}
